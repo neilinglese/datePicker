@@ -24,13 +24,10 @@ Meteor.publish("userlist", function () {
 Meteor.publish('friendsList', function(){
 
     var currentUser = Meteor.users.findOne(this.userId,{fields: {'profile.friends':1}});
-    if (currentUser) {
-        return Meteor.users.find({ _id: { $in: currentUser.profile.friends } });    
+    if (currentUser && currentUser.friends) {
+        return Meteor.users.find({ _id: { $in: currentUser.friends } });    
     } else {
         return this.ready();
     }
-    
-
-
 
 });
