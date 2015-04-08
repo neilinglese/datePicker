@@ -39,7 +39,6 @@ Template.makeEvent.events({
      * and storing it to the Events collection tied to the userID*/
     'submit form': function(e){
         e.preventDefault();
-        Session.set("hideButtons", true);
         var eventDescription = document.getElementById("eventDescription").value;
         var newEvent = {
             'userId': Meteor.userId(),
