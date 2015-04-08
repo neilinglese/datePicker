@@ -5,17 +5,29 @@
             <h1>Make A New Event</h1>
         </div>
         <div class="eventDetails">
-
-            {{#each friends}}
-                {{profile.name}}
-            {{/each}}
-
             <div class="form-style">
                 <h1>Event Information</h1>
                 <form>
                     <input type="text" name="eventName" id="eventName" value="" placeholder="Event Name" />
                     <textarea name="eventDescription" id="eventDescription" type="text" placeholder="Give a little description ;)" rows="8" cols="50"></textarea><br>
+                    <ul>
+
+                        <!--STILL WORKING ON THIS-->
+                        {{#each friends}}
+                            <li>
+
+
+                                <button class="addBtn" onclick="$(this).toggleClass('toggleOn')">{{emails/[0].address}}</button>
+
+                            </li>
+                        {{/each}}
+                    </ul>
+                    <!-- -->
+
+
                     <input type="submit" value="Create Event" />
+
+
                 </form>
             </div>
         </div>

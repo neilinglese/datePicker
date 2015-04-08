@@ -12,7 +12,7 @@ Meteor.publish("userlist", function () {
             'profile.lastname': 1,
             'profile.about': 1,
 
-
+            'emails':1,
 
             'emails[0].address': 1
         }});

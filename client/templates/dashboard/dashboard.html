@@ -6,7 +6,7 @@
         </div>
         {{#if userHasEvents}}
             <ul class="list-group">
-                {{#each createdByUser}}
+                {{#each includesUser}}
                     <li class="list-group-item" >
                         <a href="#" class="eventLink">{{eventName}}</a><br/>{{description}}
                         <button class="deleteEventBtn btn btn-primary dashboardButtons ">Delete Event</button>

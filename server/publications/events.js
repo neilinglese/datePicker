@@ -8,9 +8,5 @@ Meteor.publish('findById', function(){
 });
 
 Meteor.publish('usersDates', function(){
-	return Events.find({
-		userId: this.userId //,
-		//todo: add selector for events user is invited to 
-		//as well as the events made by user
-	});
+	return Events.find({$or: [{userId: this.userId} , {groupMembers: this.userId}]});
 });

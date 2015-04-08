@@ -4,22 +4,21 @@
         <div class="page-header">
             <h1>Friends List</h1>
         </div>
-        <form>
-            Email:<input type="text" name="Email" value="Enter an email address"><br/>
-            <input type="submit" value="Search">
-        </form>
-        <ul>
-            {{#each userDirectory}}
-                <li>
-                    {{_id}}
-                    {{profile.name}}
-                    {{profile.about}}
-                    {{#if userNotFriend}}
-                    <button class="addBtn">add</button>
-                    {{/if}}
-                </li>
+        <div class="container">
+            <ul>
+                {{#each userDirectory}}
+                    <li>
+                        <div class="profileCard">
+                            {{emails/[0].address}}<br/>
+                            {{#if userNotFriend}}
+                                <button class="addBtn btn btn-primary dashboardButtons">add</button>
+                            {{/if}}
+                        </div>
+                    </li>
 
-            {{/each}}
-        </ul>
+                {{/each}}
+            </ul>
+        </div>
+
     </div>
 </template>

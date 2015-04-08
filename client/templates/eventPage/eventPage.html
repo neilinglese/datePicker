@@ -8,6 +8,21 @@
             <div>
                 <h3>When: {{dates}}</h3>
                 <h3>About: </h3><h4>{{description}}</h4>
+                <h3>Who: </h3>
+
+                <!-- Need to loop thru each member and display the email of included members -->
+                    <ul>
+                        <!-- groupMembers is just apart of the events arrray this should be changed to a helper function -->
+                        {{#each friends}}
+
+                            <li>
+                                {{emails/[0].address}}
+
+                            </li>
+
+                        {{/each}}
+
+                    </ul>
             </div>
         </div>
     </div>

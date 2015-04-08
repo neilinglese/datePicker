@@ -1,6 +1,12 @@
 /*setup of eventData array, declaring global here so i can edit it in the render and edit events section */
 var eventData = [];
 
+//comment this out
+var groupMembers = [];
+//uncomment this out and put a userid from friends page here preferably not you own
+//var groupMembers = [put a user id here];
+//Example: var groupMembers = ['mshaWX4DthpcE7sNj','dCjc8seD3LiMdiv5j'];
+
 Template.makeEvent.rendered = function() {
     /*Rendering Calendar and handling click events*/
     var calendar = $('#eventCalendar').fullCalendar({
@@ -31,7 +37,7 @@ Template.makeEvent.rendered = function() {
 
 Template.makeEvent.helpers({
     friends: function () {
-        return Meteor.users.find({ _id: { $in: Meteor.user().profile.friends } })
+        return Meteor.users.find({ _id: { $in: Meteor.user().friends } })
     }
 });
 Template.makeEvent.events({
@@ -44,15 +50,45 @@ Template.makeEvent.events({
             'userId': Meteor.userId(),
             'eventName': $(e.target).parent().find('#eventName').val(),
             'description': eventDescription,
-            'dates': eventData
+            'dates': eventData,
+            'groupMembers':groupMembers
         };
         /*resetting the eventData array*/
         eventData = [];
+        groupMembers = [];
         /*logging the eventData array*/
         console.log(eventData);
         newEvent._id = Events.insert(newEvent);
         Session.set('newEventId', newEvent._id);
         Router.go('eventPage', newEvent);
         Notifications.success(newEvent.eventName, 'New Event was Created successfully');
+    },
+
+    //STILL WORKING ON THIS NO DATA IS BEING PUSHED YET INTO EVENTS
+    'click .addBtn': function(e) {
+        e.preventDefault();
+        var thisId = this._id;
+
+        console.log(e.target);
+
+        if($(event.target).hasClass("toggleOn"))
+        {
+            console.log('friend on');
+            groupMembers.push(this._id);
+        }else{
+            console.log('friend Off');
+            for(var z = groupMembers.length; z--;) {
+                if (groupMembers[z] === this._id) {
+                    groupMembers.splice(z, 1);
+                }
+            }
+        }
+
+        console.log(groupMembers);
+
+
+        //Need to check array and if it contains the id remove it, else add it
+        //that will allow for toggling on who to invite
     }
+
 });

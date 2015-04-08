@@ -10,12 +10,12 @@ Template.dashboard.helpers({
         return Events.find({userId: Meteor.userId()}).count() > 0 ? true : false;
     },
 
-    createdByUser: function(){
-        if(Events.find({userId: Meteor.userId()}).count() === 0){
+    includesUser: function(){
+        if(Events.find({$or: [{userId: Meteor.userId()}, {groupMembers: Meteor.userId()}]}).count() === 0){
             Session.set("hideButtons", false);
         }else{
             Session.set("hideButtons", true);
-            return Events.find({userId: Meteor.userId()});
+            return Events.find({$or: [{userId: Meteor.userId()}, {groupMembers: Meteor.userId()}]});
         }
     }
 });
