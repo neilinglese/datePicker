@@ -6,10 +6,18 @@ var groupMembers = [];
 //uncomment this out and put a userid from friends page here preferably not you own
 //var groupMembers = [put a user id here];
 //Example: var groupMembers = ['mshaWX4DthpcE7sNj','dCjc8seD3LiMdiv5j'];
+var currentDate = moment();
+var currentYear = currentDate.year();
 
 Template.makeEvent.rendered = function() {
+
     /*Rendering Calendar and handling click events*/
     var calendar = $('#eventCalendar').fullCalendar({
+        header: {
+            left: 'prevYear',
+            center: 'prev, title, next',
+            right: 'nextYear'
+        },
         /*DayClick function handling day clicking*/
         dayClick:function(date,allDay,jsEvent,view){
             /*OnClick storing day in DayClicked in a format of YYYY-MM-DD*/
@@ -35,11 +43,16 @@ Template.makeEvent.rendered = function() {
     })
 };
 
+
 Template.makeEvent.helpers({
     friends: function () {
-        return Meteor.users.find({ _id: { $in: Meteor.user().friends } })
+        return Meteor.users.find({ _id: { $in: Meteor.user().friends } }); 
+    },
+    year: function(){
+        return currentYear;
     }
 });
+
 Template.makeEvent.events({
     /*Submit function, taking data from page eventName, description, and the array of eventData
      * and storing it to the Events collection tied to the userID*/
@@ -86,10 +99,16 @@ Template.makeEvent.events({
         }
 
         console.log(groupMembers);
-
-
         //Need to check array and if it contains the id remove it, else add it
         //that will allow for toggling on who to invite
+    },
+    'click #prevYear': function(){
+        var prevYear = currentDate.subtract(1, 'y');
+        return currentYear = prevYear.year();    
     }
-
 });
+
+
+
+
+

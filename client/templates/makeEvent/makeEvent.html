@@ -23,17 +23,20 @@
                         {{/each}}
                     </ul>
                     <!-- -->
-
-
                     <input type="submit" value="Create Event" />
-
-
                 </form>
             </div>
         </div>
         <div class="calView">
-            <div id ="eventCalendar">
+            <div id ="eventCalendar"></div>
+        </div>
+        <div id="monthAndYear">
+            <div id="year">
+                <button id="prevYear" type="button">Previous</button>
+                <div id="yearDisplayed">{{year}}</div>
+                <button id="nextYear" type="button">Next</button>
             </div>
+            <div id="month"></div>
         </div>
     </div>
 </template>
