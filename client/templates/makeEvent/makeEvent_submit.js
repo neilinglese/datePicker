@@ -9,15 +9,13 @@ var groupMembers = [];
 var currentDate = moment();
 var currentYear = currentDate.year();
 
+Session.set('Year', currentYear);
+
 Template.makeEvent.rendered = function() {
+
 
     /*Rendering Calendar and handling click events*/
     var calendar = $('#eventCalendar').fullCalendar({
-        header: {
-            left: 'prevYear',
-            center: 'prev, title, next',
-            right: 'nextYear'
-        },
         /*DayClick function handling day clicking*/
         dayClick:function(date,allDay,jsEvent,view){
             /*OnClick storing day in DayClicked in a format of YYYY-MM-DD*/
@@ -49,7 +47,7 @@ Template.makeEvent.helpers({
         return Meteor.users.find({ _id: { $in: Meteor.user().friends } }); 
     },
     year: function(){
-        return currentYear;
+        return Session.get('Year');
     }
 });
 
@@ -104,7 +102,13 @@ Template.makeEvent.events({
     },
     'click #prevYear': function(){
         var prevYear = currentDate.subtract(1, 'y');
-        return currentYear = prevYear.year();    
+        currentYear = prevYear.year();    
+        Session.set('Year', currentYear);
+    }, 
+    'click #nextYear': function(){
+        var nextYear = currentDate.add(1, 'y');
+        currentYear = nextYear.year();
+        Session.set('Year', currentYear);
     }
 });
 
