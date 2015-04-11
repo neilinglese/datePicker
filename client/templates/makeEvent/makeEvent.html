@@ -26,17 +26,20 @@
                     <input type="submit" value="Create Event" />
                 </form>
             </div>
-        </div>
+        </div><!--closes .eventDetails-->
         <div class="calView">
             <div id ="eventCalendar"></div>
         </div>
-        <div id="monthAndYear">
+        <div class="make-event-first-pick" id="monthAndYear">
             <div id="year">
-                <button id="prevYear" type="button">Previous</button>
-                <div id="yearDisplayed">{{year}}</div>
-                <button id="nextYear" type="button">Next</button>
+                <h2>Year</h2>
+                <button class="goBack" id="prevYear" type="button">Previous</button>
+                <div class="centerCal" id="yearDisplayed">{{year}}</div>
+                <button class="goForward" id="nextYear" type="button">Next</button>
             </div>
-            <div id="month"></div>
+            <div id="months">
+
+            </div>
         </div>
-    </div>
+    </div><!--closes .template-makeEvent-->
 </template>
