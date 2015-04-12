@@ -132,10 +132,15 @@
 }
 
 .make-event-first-pick{
+    position: relative;
     clear: both;
     width: 50%;
     float: left;
 
+}
+
+.year-container{
+    margin: 0 auto;
 }
 
 .goBack, .goForward, .centerCal{
@@ -146,6 +151,37 @@
 .centerCal{
     margin: 0 3rem 0 3rem;
 }
+
+.monthsList{
+    margin-top: 5rem;
+}
+
+.month{
+    display: inline-block;
+    width: 10rem;
+    height: 10rem;
+    text-align: center;
+    border: 1px solid gray;
+    margin: .5rem;
+}
+
+.month p{
+    margin-top: 42%;
+}
+
+.month:hover{
+    background: darkorange;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

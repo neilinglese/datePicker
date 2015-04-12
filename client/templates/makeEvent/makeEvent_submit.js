@@ -1,19 +1,13 @@
 /*setup of eventData array, declaring global here so i can edit it in the render and edit events section */
 var eventData = [];
 
-//comment this out
+//array to put invited groupMembers into
 var groupMembers = [];
-//uncomment this out and put a userid from friends page here preferably not you own
-//var groupMembers = [put a user id here];
-//Example: var groupMembers = ['mshaWX4DthpcE7sNj','dCjc8seD3LiMdiv5j'];
-var currentDate = moment();
-var currentYear = currentDate.year();
 
-Session.set('Year', currentYear);
+var thisYear = moment().year();
+Session.set('Year', thisYear);
 
 Template.makeEvent.rendered = function() {
-
-
     /*Rendering Calendar and handling click events*/
     var calendar = $('#eventCalendar').fullCalendar({
         /*DayClick function handling day clicking*/
@@ -47,6 +41,7 @@ Template.makeEvent.helpers({
         return Meteor.users.find({ _id: { $in: Meteor.user().friends } }); 
     },
     year: function(){
+        console.log(Session.get('Year'));
         return Session.get('Year');
     }
 });
@@ -76,12 +71,9 @@ Template.makeEvent.events({
         Notifications.success(newEvent.eventName, 'New Event was Created successfully');
     },
 
-    //STILL WORKING ON THIS NO DATA IS BEING PUSHED YET INTO EVENTS
     'click .addBtn': function(e) {
         e.preventDefault();
         var thisId = this._id;
-
-        console.log(e.target);
 
         if($(event.target).hasClass("toggleOn"))
         {
@@ -97,18 +89,40 @@ Template.makeEvent.events({
         }
 
         console.log(groupMembers);
-        //Need to check array and if it contains the id remove it, else add it
-        //that will allow for toggling on who to invite
     },
+
     'click #prevYear': function(){
-        var prevYear = currentDate.subtract(1, 'y');
-        currentYear = prevYear.year();    
-        Session.set('Year', currentYear);
+        //take current date and subtract a year
+        var x = Session.get('Year');
+        var prevYear = x - 1;
+        //check to make sure prevYear is not less than thisYear
+        if(prevYear >= thisYear){
+            //store prevYear to Session
+            Session.set('Year', prevYear);
+            console.log(Session.get('Year'));
+        }else if(prevYear < thisYear){
+            Session.set('Year', x);
+        }
     }, 
+
     'click #nextYear': function(){
-        var nextYear = currentDate.add(1, 'y');
-        currentYear = nextYear.year();
-        Session.set('Year', currentYear);
+        //take current year and add a year
+        var x = Session.get('Year');
+        var nextYear = x + 1;
+        Session.set('Year', nextYear);
+        console.log(Session.get('Year'));
+    },
+
+    'click .month': function(e){
+        //get reference to event target
+        var $this = $(e.target);
+        //find all divs with class of .month
+        var $months = $('.month');
+        //remove .month class from all divs
+        $months.removeClass('toggleOn');
+        //find closest div with class month from target and add class '.toggleOn'
+        $this.closest('.month').addClass('toggleOn');
+        //
     }
 });
 
