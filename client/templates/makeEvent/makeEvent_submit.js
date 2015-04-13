@@ -58,17 +58,20 @@ Template.makeEvent.events({
             'eventName': $(e.target).parent().find('#eventName').val(),
             'description': eventDescription,
             'dates': eventData,
+            'eventMonthYear': new Date(Session.get("Year"), $('div.toggleOn').data('month')),
             'groupMembers':groupMembers
         };
         /*resetting the eventData array*/
         eventData = [];
         groupMembers = [];
+        Session.set('Year', thisYear);
         /*logging the eventData array*/
         console.log(eventData);
         newEvent._id = Events.insert(newEvent);
         Session.set('newEventId', newEvent._id);
         Router.go('eventPage', newEvent);
         Notifications.success(newEvent.eventName, 'New Event was Created successfully');
+        
     },
 
     'click .addBtn': function(e) {
