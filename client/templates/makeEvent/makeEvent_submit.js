@@ -5,6 +5,7 @@ var eventData = [];
 var groupMembers = [];
 
 var thisYear = moment().year();
+var thisMonth = moment().month();
 Session.set('Year', thisYear);
 
 Template.makeEvent.rendered = function() {
@@ -65,8 +66,8 @@ Template.makeEvent.events({
             'groupMembers':groupMembers
         };
         //make sure event name, month and year are not void
-        if(newEventName ==='' || newEventMonth === undefined){
-            Notifications.error(newEvent.eventName, 'All new events must have an Event name and Month');
+        if(newEventName ==='' || newEventMonth === undefined || ((newEventMonth < thisMonth) && (Session.get('Year') === thisYear))){
+            Notifications.error(newEvent.eventName, 'All new events must have an Event name and a Valid Month');
         }else{
             /*resetting the eventData array*/
             eventData = [];

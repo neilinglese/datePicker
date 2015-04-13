@@ -3,9 +3,11 @@ Template.registerHelper('truncate', function(string, length) {
   return _(cleanString).truncate(length);
 });
 
-Template.registerHelper('convertDate', function(date){
+Template.registerHelper('targetDateDisplay', function(date){
     var momentFromDate = moment(date);
     var getMonth = momentFromDate.format('MMMM');
     var getYear = momentFromDate.format('YYYY');
     return getMonth + ' ' + getYear;
 });
+
+Template.registerHelper()
