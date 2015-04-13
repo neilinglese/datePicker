@@ -46,6 +46,7 @@ Template.makeEvent.helpers({
     }
 });
 
+
 Template.makeEvent.events({
     /*Submit function, taking data from page eventName, description, and the array of eventData
      * and storing it to the Events collection tied to the userID*/

@@ -173,6 +173,13 @@
     background: darkorange;
 }
 
+.deleteEventBtn, .editEventBtn{
+    margin-top: -1.2rem;
+}
+
+.list-group-item{
+   min-height: 65px;
+}
 
 
 
