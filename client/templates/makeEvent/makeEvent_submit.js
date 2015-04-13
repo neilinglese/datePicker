@@ -63,14 +63,14 @@ Template.makeEvent.events({
             'eventMonthYear': new Date(Session.get("Year"), newEventMonth),
             'groupMembers':groupMembers
         };
-        /*resetting the eventData array*/
-        eventData = [];
-        groupMembers = [];
-        Session.set('Year', thisYear);
         //make sure event name, month and year are not void
         if(newEventName ==='' || newEventMonth === undefined){
             Notifications.error(newEvent.eventName, 'All new events must have an Event name and Month');
         }else{
+            /*resetting the eventData array*/
+            eventData = [];
+            groupMembers = [];
+            Session.set('Year', thisYear);
             newEvent._id = Events.insert(newEvent);
             Session.set('newEventId', newEvent._id);
             Router.go('eventPage', newEvent);
