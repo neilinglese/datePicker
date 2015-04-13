@@ -52,26 +52,30 @@ Template.makeEvent.events({
     'submit form': function(e){
         e.preventDefault();
         Session.set("hideButtons", true);
+        var newEventName = $(e.target).parent().find('#eventName').val();
+        var newEventMonth = $('div.toggleOn').data('month');
         var eventDescription = document.getElementById("eventDescription").value;
         var newEvent = {
             'userId': Meteor.userId(),
-            'eventName': $(e.target).parent().find('#eventName').val(),
+            'eventName': newEventName,
             'description': eventDescription,
             'dates': eventData,
-            'eventMonthYear': new Date(Session.get("Year"), $('div.toggleOn').data('month')),
+            'eventMonthYear': new Date(Session.get("Year"), newEventMonth),
             'groupMembers':groupMembers
         };
         /*resetting the eventData array*/
         eventData = [];
         groupMembers = [];
         Session.set('Year', thisYear);
-        /*logging the eventData array*/
-        console.log(eventData);
-        newEvent._id = Events.insert(newEvent);
-        Session.set('newEventId', newEvent._id);
-        Router.go('eventPage', newEvent);
-        Notifications.success(newEvent.eventName, 'New Event was Created successfully');
-        
+        //make sure event name, month and year are not void
+        if(newEventName ==='' || newEventMonth === undefined){
+            Notifications.error(newEvent.eventName, 'All new events must have an Event name and Month');
+        }else{
+            newEvent._id = Events.insert(newEvent);
+            Session.set('newEventId', newEvent._id);
+            Router.go('eventPage', newEvent);
+            Notifications.success(newEvent.eventName, 'New Event was Created successfully');
+        }
     },
 
     'click .addBtn': function(e) {
@@ -95,14 +99,13 @@ Template.makeEvent.events({
     },
 
     'click #prevYear': function(){
-        //take current date and subtract a year
+        //get current year and subtract a year
         var x = Session.get('Year');
         var prevYear = x - 1;
         //check to make sure prevYear is not less than thisYear
         if(prevYear >= thisYear){
             //store prevYear to Session
             Session.set('Year', prevYear);
-            console.log(Session.get('Year'));
         }else if(prevYear < thisYear){
             Session.set('Year', x);
         }
@@ -113,7 +116,6 @@ Template.makeEvent.events({
         var x = Session.get('Year');
         var nextYear = x + 1;
         Session.set('Year', nextYear);
-        console.log(Session.get('Year'));
     },
 
     'click .month': function(e){
