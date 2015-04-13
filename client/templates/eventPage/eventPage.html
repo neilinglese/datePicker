@@ -6,9 +6,9 @@
     <div class="eventDetails">
         <div class="event">
             <div>
-                <h3>When: {{dates}}</h3>
+                <h3>When: {{eventMonthYear}}</h3>
                 <h3>About: </h3><h4>{{description}}</h4>
-                <h3>Who: </h3>
+                <h3>Who: {{groupMembers/[0].memberId}}</h3>
 
                 <!-- Need to loop thru each member and display the email of included members -->
                     <ul>
