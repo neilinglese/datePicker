@@ -65,7 +65,7 @@ Template.makeEvent.events({
             'eventMonthYear': new Date(Session.get("Year"), newEventMonth),
             'groupMembers':groupMembers
         };
-        //make sure event name and month are picked, only allow choosing month that has not passed
+        //make sure event name, month and year are not void
         if(newEventName ==='' || newEventMonth === undefined || ((newEventMonth < thisMonth) && (Session.get('Year') === thisYear))){
             Notifications.error(newEvent.eventName, 'All new events must have an Event name and a Valid Month');
         }else{

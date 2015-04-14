@@ -9,3 +9,5 @@ Template.registerHelper('targetDateDisplay', function(date){
     var getYear = momentFromDate.format('YYYY');
     return getMonth + ' ' + getYear;
 });
+
+Template.registerHelper()
