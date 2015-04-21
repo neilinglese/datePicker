@@ -1,5 +1,6 @@
 
-Session.setDefault('somePeople', []);
+Session.setDefault('somePeople', []); 
+
 Template.eventPage.rendered = function(){
     /*Getting Event data from iron-router and storing it into an array*/
     var eventData = this.data.dates;
@@ -20,6 +21,7 @@ Template.eventPage.rendered = function(){
         }
     })
 };
+
 Template.eventPage.helpers({
 
     /* this is just an example from the makeEvent Page
@@ -33,4 +35,10 @@ Template.eventPage.helpers({
     }
 
 
+});
+
+Template.eventPage.events({
+    'click #pickDatesBtn': function(){
+    Router.go('pickDates', {_id:this._id});     
+    }
 });

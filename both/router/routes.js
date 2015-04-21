@@ -32,3 +32,8 @@ Router.route('/editEvent/:_id', {
 	data: function(){return Events.findOne(this.params._id);}
 });
 
+Router.route('/eventPage/:_id/pickDates', {
+  name: 'pickDates',
+  data: function(){return Events.findOne(this.params._id);}
+});
+
