@@ -82,6 +82,7 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     width: 100%;
+    height: 20%;
     background: #fff;
     margin-bottom: 4%;
     border: 1px solid #ccc;
@@ -129,6 +130,71 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
+<<<<<<< HEAD
 .profileCard{
 
 }
+=======
+
+.make-event-first-pick{
+    position: relative;
+    clear: both;
+    width: 50%;
+    float: left;
+
+}
+
+.year-container{
+    margin: 0 auto;
+}
+
+.goBack, .goForward, .centerCal{
+    width: 20%;
+    display: inline;
+}
+
+.centerCal{
+    margin: 0 3rem 0 3rem;
+}
+
+.monthsList{
+    margin-top: 5rem;
+}
+
+.month{
+    display: inline-block;
+    width: 10rem;
+    height: 10rem;
+    text-align: center;
+    border: 1px solid gray;
+    margin: .5rem;
+}
+
+.month p{
+    margin-top: 42%;
+}
+
+.month:hover{
+    background: darkorange;
+}
+
+.deleteEventBtn, .editEventBtn{
+    margin-top: -1.2rem;
+}
+
+.list-group-item{
+   min-height: 65px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> maria-fourth-branch

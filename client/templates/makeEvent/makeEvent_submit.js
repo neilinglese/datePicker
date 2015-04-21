@@ -1,11 +1,12 @@
 /*setup of eventData array, declaring global here so i can edit it in the render and edit events section */
 var eventData = [];
 
-//comment this out
+//array to put invited groupMembers into
 var groupMembers = [];
-//uncomment this out and put a userid from friends page here preferably not you own
-//var groupMembers = [put a user id here];
-//Example: var groupMembers = ['mshaWX4DthpcE7sNj','dCjc8seD3LiMdiv5j'];
+
+var thisYear = moment().year();
+var thisMonth = moment().month();
+Session.set('Year', thisYear);
 
 Template.makeEvent.rendered = function() {
     /*Rendering Calendar and handling click events*/
@@ -35,61 +36,107 @@ Template.makeEvent.rendered = function() {
     })
 };
 
+
 Template.makeEvent.helpers({
     friends: function () {
-        return Meteor.users.find({ _id: { $in: Meteor.user().friends } })
+        return Meteor.users.find({ _id: { $in: Meteor.user().friends } }); 
+    },
+    year: function(){
+        console.log(Session.get('Year'));
+        return Session.get('Year');
     }
 });
+
+
 Template.makeEvent.events({
     /*Submit function, taking data from page eventName, description, and the array of eventData
      * and storing it to the Events collection tied to the userID*/
     'submit form': function(e){
         e.preventDefault();
         Session.set("hideButtons", true);
+        var newEventName = $(e.target).parent().find('#eventName').val();
+        var newEventMonth = $('div.toggleOn').data('month');
         var eventDescription = document.getElementById("eventDescription").value;
         var newEvent = {
             'userId': Meteor.userId(),
-            'eventName': $(e.target).parent().find('#eventName').val(),
+            'eventName': newEventName,
             'description': eventDescription,
             'dates': eventData,
+            'eventMonthYear': new Date(Session.get("Year"), newEventMonth),
             'groupMembers':groupMembers
         };
-        /*resetting the eventData array*/
-        eventData = [];
-        groupMembers = [];
-        /*logging the eventData array*/
-        console.log(eventData);
-        newEvent._id = Events.insert(newEvent);
-        Session.set('newEventId', newEvent._id);
-        Router.go('eventPage', newEvent);
-        Notifications.success(newEvent.eventName, 'New Event was Created successfully');
+        //make sure event name, month and year are not void
+        if(newEventName ==='' || newEventMonth === undefined || ((newEventMonth < thisMonth) && (Session.get('Year') === thisYear))){
+            Notifications.error(newEvent.eventName, 'All new events must have an Event name and a Valid Month');
+        }else{
+            /*resetting the eventData array*/
+            eventData = [];
+            groupMembers = [];
+            Session.set('Year', thisYear);
+            newEvent._id = Events.insert(newEvent);
+            Session.set('newEventId', newEvent._id);
+            Router.go('eventPage', newEvent);
+            Notifications.success(newEvent.eventName, 'New Event was Created successfully');
+        }
     },
 
-    //STILL WORKING ON THIS NO DATA IS BEING PUSHED YET INTO EVENTS
     'click .addBtn': function(e) {
         e.preventDefault();
-        var thisId = this._id;
-
-        console.log(e.target);
+        var newMember = {
+            "memberId": this._id,
+            "memberDates": []
+        };
 
         if($(event.target).hasClass("toggleOn"))
         {
             console.log('friend on');
-            groupMembers.push(this._id);
+            groupMembers.push(newMember);
         }else{
             console.log('friend Off');
             for(var z = groupMembers.length; z--;) {
-                if (groupMembers[z] === this._id) {
+                if (groupMembers[z].memberId === this._id) {
                     groupMembers.splice(z, 1);
                 }
             }
         }
 
         console.log(groupMembers);
+    },
 
+    'click #prevYear': function(){
+        //get current year and subtract a year
+        var x = Session.get('Year');
+        var prevYear = x - 1;
+        //check to make sure prevYear is not less than thisYear
+        if(prevYear >= thisYear){
+            //store prevYear to Session
+            Session.set('Year', prevYear);
+        }else if(prevYear < thisYear){
+            Session.set('Year', x);
+        }
+    }, 
 
-        //Need to check array and if it contains the id remove it, else add it
-        //that will allow for toggling on who to invite
+    'click #nextYear': function(){
+        //take current year and add a year
+        var x = Session.get('Year');
+        var nextYear = x + 1;
+        Session.set('Year', nextYear);
+    },
+
+    'click .month': function(e){
+        //get reference to event target
+        var $this = $(e.target);
+        //find all divs with class of .month
+        var $months = $('.month');
+        //remove .month class from all divs
+        $months.removeClass('toggleOn');
+        //find closest div with class month from target and add class '.toggleOn'
+        $this.closest('.month').addClass('toggleOn');
+        //
     }
-
 });
+
+
+
+
+
