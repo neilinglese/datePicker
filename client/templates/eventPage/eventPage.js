@@ -1,7 +1,7 @@
 
 Session.setDefault('somePeople', []); 
 
-Template.eventPage.rendered = function(){
+Template.eventPage.onRendered(function(){
     /*Getting Event data from iron-router and storing it into an array*/
     var eventData = this.data.dates;
 
@@ -20,7 +20,7 @@ Template.eventPage.rendered = function(){
             });
         }
     })
-};
+});
 
 Template.eventPage.helpers({
 
