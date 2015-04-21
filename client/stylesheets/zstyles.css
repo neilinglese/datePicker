@@ -71,8 +71,7 @@
 .form-style input[type="time"],
 .form-style input[type="url"],
 .form-style textarea,
-.form-style select
-{
+.form-style select{
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -99,8 +98,7 @@
 .form-style input[type="time"]:focus,
 .form-style input[type="url"]:focus,
 .form-style textarea:focus,
-.form-style select:focus
-{
+.form-style select:focus{
     box-shadow: 0 0 5px darkorange;
     padding: 3%;
     border: 1px solid darkorange;
