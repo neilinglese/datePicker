@@ -18,6 +18,13 @@ Template.pickDates.onRendered(function(){
     	},
     	defaultDate: targetMonthYear,
     	eventDurationEditable: false,
+    	        /*dayRender function handling the intial rendering of days on page load*/
+        dayRender: function (date, cell) {
+            /*For each item in the eventData onLoad adding the toggleOn class*/
+            $.each(eventData,function(index,value){
+                $("td[data-date='"+value+"']").addClass('toggleOn');
+            });
+        },
 		dayClick:function(date,jsEvent,view){
 	        /*OnClick storing day in DayClicked in a format of YYYY-MM-DD*/
 	        var DayClicked =  $.fullCalendar.moment(date).format('YYYY-MM-DD');
