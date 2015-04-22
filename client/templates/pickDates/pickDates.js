@@ -8,16 +8,49 @@ Template.pickDates.onRendered(function(){
 	//get the target month and year from db
 	targetMonthYear = this.data.eventMonthYear;
 	Session.set('calendarTarget', targetMonthYear);
+	var currentMoment = moment(targetMonthYear);
+
+	var prevChosenMoment = moment(targetMonthYear).subtract(1, 'M');
+
+	var nextChosenMoment = moment(targetMonthYear).add(1, 'M');
+
+	var endNextMoment = moment(targetMonthYear).add(2, 'M');
+		console.log(endNextMoment);
 
     var calendar = $('#pickDatesCal').fullCalendar({
     	header:{
     		today: false,
-    		left: 'prev',
-    		right: 'next',
-    		center: 'title'
+    		left: 'prevMonth',
+    		right: 'nextMonth',
+    		center: 'title targetMonth'
     	},
+    	views: {
+ 			prevMonth:{
+ 				type: 'month',
+ 				duration: { months: 1},
+ 				start: moment(targetMonthYear).subtract(1, 'M'),
+ 				end: moment(targetMonthYear),
+ 				intervalStart: moment(targetMonthYear).subtract(1, 'M'),
+ 				intervalEnd: moment(targetMonthYear)
+ 			}, 
+ 			targetMonth:{
+ 				type:'month',
+ 				duration: {months: 1},
+ 				start: currentMoment,
+ 				end: nextChosenMoment,
+ 				intervalStart: currentMoment,
+ 				intervalEnd: nextChosenMoment
+ 			},
+ 			nextMonth:{
+ 				type: 'month',
+ 				duration: {months: 1},
+ 				start: nextChosenMoment,
+ 				end: endNextMoment,
+ 				intervalStart: nextChosenMoment,
+ 				intervalEnd: endNextMoment
+ 			}
+ 		},
     	defaultDate: targetMonthYear,
-    	eventDurationEditable: false,
     	        /*dayRender function handling the intial rendering of days on page load*/
         dayRender: function (date, cell) {
             /*For each item in the eventData onLoad adding the toggleOn class*/
