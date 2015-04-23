@@ -5,6 +5,8 @@ var eventData = [];
 
 
 Template.pickDates.onRendered(function(){
+    //get reference to the div #pickDatesCal
+    var $calContainer = $('#pickDatesCal');
 	//get the target month and year from db
 	targetMonthYear = this.data.eventMonthYear;
 
@@ -14,7 +16,7 @@ Template.pickDates.onRendered(function(){
 
 	var nextChosenMoment = moment(targetMonthYear).add(1, 'M');
 
-    var calendar = $('#pickDatesCal').fullCalendar({
+    var calendar = $calContainer.fullCalendar({
     	header:{
     		today: false,
     		left: 'prev',
@@ -30,12 +32,12 @@ Template.pickDates.onRendered(function(){
             });
         },
         viewRender: function(view, element){
-            var calCurrent = $('#pickDatesCal').fullCalendar('getDate');
+            var calCurrent = $calContainer.fullCalendar('getDate');
             if(calCurrent < prevChosenMoment){
-                $('#pickDatesCal').fullCalendar('gotoDate', prevChosenMoment);
+                $calContainer.fullCalendar('gotoDate', prevChosenMoment);
             }
             if(calCurrent > nextChosenMoment){
-                $('#pickDatesCal').fullCalendar('gotoDate', nextChosenMoment);
+                $calContainer.fullCalendar('gotoDate', nextChosenMoment);
             }
         },
 		dayClick:function(date,jsEvent,view){

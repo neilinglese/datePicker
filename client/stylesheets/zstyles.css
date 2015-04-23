@@ -183,11 +183,12 @@
    min-height: 65px;
 }
 
-#pickDatesCal{
+.pickDatesContainer{
+    padding-top: 50px;
     width: 50%;
-    height: 75%;
     margin: 0 auto;
 }
+
 
 
 
