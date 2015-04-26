@@ -8,34 +8,6 @@ var thisYear = moment().year();
 var thisMonth = moment().month();
 Session.set('Year', thisYear);
 
-Template.makeEvent.rendered = function() {
-    /*Rendering Calendar and handling click events*/
-    var calendar = $('#eventCalendar').fullCalendar({
-        /*DayClick function handling day clicking*/
-        dayClick:function(date,allDay,jsEvent,view){
-            /*OnClick storing day in DayClicked in a format of YYYY-MM-DD*/
-            var DayClicked =  $.fullCalendar.moment(date).format('YYYY-MM-DD');
-            $(this).toggleClass( "toggleOn" );
-            /*If the day has a class of toggleOn pusinh into the eventData array else looping array and removing it*/
-            if($(this).hasClass("toggleOn"))
-            {
-                console.log('On');
-                eventData.push(DayClicked);
-            }else{
-                console.log('Off');
-                for(var z = eventData.length; z--;) {
-                    if (eventData[z] === DayClicked) {
-                        eventData.splice(z, 1);
-                    }
-                }
-            }
-            /*Just logging the dayClicked and the array to check for errors*/
-            console.log(DayClicked);
-            console.log(eventData);
-        }
-    })
-};
-
 
 Template.makeEvent.helpers({
     friends: function () {
