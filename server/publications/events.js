@@ -8,7 +8,7 @@ Meteor.publish('findById', function(){
 });
 
 Meteor.publish('usersDates', function(){
-	return Events.find({$or: [{userId: this.userId} , {groupMembers: this.userId}]});
+	return Events.find({$or: [{userId: this.userId} , {'groupMembers.memberId': this.userId}]});
 });
 
 Meteor.publish('getDates', function(){
