@@ -12,5 +12,6 @@ Meteor.publish('usersDates', function(){
 });
 
 Meteor.publish('getDates', function(){
+	//todo: get dates from event for userId and each groupMember's memberDates
 	return Events.find();
 });

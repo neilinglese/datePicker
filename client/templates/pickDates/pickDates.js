@@ -59,16 +59,11 @@ Template.pickDates.onRendered(function(){
 	        }
 	        console.log(eventData);
         }//closes dayClick
-
     })//closes calendar
-
 });//closes onRendered
 
 Template.pickDates.events({
 
 });
 
-Template.pickDates.helpers({
-
-});
 
