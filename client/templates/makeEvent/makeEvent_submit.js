@@ -39,7 +39,7 @@ Template.makeEvent.rendered = function() {
 
 Template.makeEvent.helpers({
     friends: function () {
-        return Meteor.users.find({ _id: { $in: Meteor.user().friends } }); 
+        return Meteor.users.find({ _id: { $in: Meteor.user().friends } });
     },
     year: function(){
         console.log(Session.get('Year'));
@@ -114,7 +114,7 @@ Template.makeEvent.events({
         }else if(prevYear < thisYear){
             Session.set('Year', x);
         }
-    }, 
+    },
 
     'click #nextYear': function(){
         //take current year and add a year
