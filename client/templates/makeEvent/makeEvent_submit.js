@@ -41,12 +41,33 @@ Template.makeEvent.events({
         if(newEventName ==='' || newEventMonth === undefined || ((newEventMonth < thisMonth) && (Session.get('Year') === thisYear))){
             Notifications.error(newEvent.eventName, 'All new events must have an Event name and a Valid Month');
         }else{
-            /*resetting the eventData array*/
-            eventData = [];
-            groupMembers = [];
+
             Session.set('Year', thisYear);
             newEvent._id = Events.insert(newEvent);
             Session.set('newEventId', newEvent._id);
+
+            //create Dates db record for eventCreator
+            Dates.insert({
+                'event_id': newEvent._id,
+                'eventMember_id': Meteor.userId(),
+                'memberDatesPicked': []
+            });
+
+
+            //create Dates db record for each groupMember
+            for(var i = 0; i < groupMembers.length; i++){
+                var newDatesPicked = {
+                    'event_id': newEvent._id,
+                    'eventMember_id': groupMembers[i].memberId,
+                    'memberDatesPicked': []
+                };
+                Dates.insert(newDatesPicked);
+            }
+
+            /*resetting the eventData array*/
+            eventData = [];
+            groupMembers = [];
+
             Router.go('eventPage', newEvent);
             Notifications.success(newEvent.eventName, 'New Event was Created successfully');
         }
