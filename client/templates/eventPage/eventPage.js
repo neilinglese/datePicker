@@ -9,8 +9,6 @@ Template.eventPage.onRendered(function(){
 
     Session.set('somePeople', this.data.groupMembers);
 
-    console.log( this.data.groupMembers);
-    console.log(somePeople);
     var calendar = $('#eventCalendar').fullCalendar({
         /*dayRender function handling the intial rendering of days on page load*/
         dayRender: function (date, cell) {
@@ -30,10 +28,10 @@ Template.eventPage.helpers({
         unsure atm how to get the id without this
      */
     friends: function () {
-        Session.get('somePeople');
-        return Meteor.users.find({ _id: { $in: somePeople } })
-    }
+        var somePeople = Session.get('somePeople');
+        return Meteor.users.find({_id: {$in: somePeople}})
 
+    }
 
 });
 

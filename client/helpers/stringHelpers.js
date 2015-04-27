@@ -10,4 +10,6 @@ Template.registerHelper('targetDateDisplay', function(date){
     return getMonth + ' ' + getYear;
 });
 
-Template.registerHelper()
+Template.registerHelper('profileNames', function(memberId){
+	return Meteor.users.find({_id: memberId } , {'_id': 0, 'profile.name': 1});
+});

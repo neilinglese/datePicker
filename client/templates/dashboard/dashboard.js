@@ -6,7 +6,7 @@ Meteor.startup(function () {
 
 Template.dashboard.rendered = function() {
 
-    if(Events.find({$or: [{userId: Meteor.userId()}, {groupMembers: Meteor.userId()}]}).count() === 0){
+    if(Events.find({$or: [{userId: Meteor.userId()}, {'groupMembers.memberId': Meteor.userId()}]}).count() === 0){
         Session.set("hideButtons", false);
     }else{
         Session.set("hideButtons", true);

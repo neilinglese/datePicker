@@ -6,23 +6,22 @@
     <div class="eventDetails">
         <div class="event">
             <div>
-                <h3>When: {{targetDateDisplay eventMonthYear}}</h3>
+                <h3>When:</h3>
+                <h4>{{targetDateDisplay eventMonthYear}}</h4>
                 <h3>About: </h3><h4>{{description}}</h4>
-                <h3>Who: {{groupMembers/[0].memberId}}</h3>
-                <button class="button" id="pickDatesBtn" type="button">Pick my dates!</button>
-                <!-- Need to loop thru each member and display the email of included members -->
-                    <ul>
-                        <!-- groupMembers is just apart of the events arrray this should be changed to a helper function -->
-                        {{#each friends}}
-
-                            <li>
-                                {{emails/[0].address}}
-
-                            </li>
-
+                <h3>Who:</h3>
+                    <ul class="eventPageWhoList">
+                        {{#each groupMembers}}
+                        <li>
+                            <h4>
+                                {{#each profileNames memberId}}
+                                    {{profile.name}}
+                                {{/each}}
+                            </h4>
+                        </li>
                         {{/each}}
-
                     </ul>
+                <button class="button" id="pickDatesBtn" type="button">Pick my dates!</button>
             </div>
         </div>
     </div>
