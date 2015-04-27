@@ -1,10 +1,12 @@
 var targetMonthYear;
 var prevMonth;
 var nextMonth;
-var eventData = [];
+var eventData;
 
 
 Template.pickDates.onRendered(function(){
+    //get event user dates
+    eventData = this.data.dates;
     //get reference to the div #pickDatesCal
     var $calContainer = $('#pickDatesCal');
 	//get the target month and year from db
@@ -68,6 +70,7 @@ Template.pickDates.events({
         if(x === this.userId){
             Events.update({_id: this._id}, {$set:{'dates': eventData}});
         }
+
     }
 });
 
