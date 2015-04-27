@@ -63,7 +63,12 @@ Template.pickDates.onRendered(function(){
 });//closes onRendered
 
 Template.pickDates.events({
-
+    'click #submitDatesChosen': function(){
+        var x = Meteor.userId();
+        if(x === this.userId){
+            Events.update({_id: this._id}, {$set:{'dates': eventData}});
+        }
+    }
 });
 
 
