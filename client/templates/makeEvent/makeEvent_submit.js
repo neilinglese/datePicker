@@ -55,8 +55,7 @@ Template.makeEvent.events({
     'click .addBtn': function(e) {
         e.preventDefault();
         var newMember = {
-            "memberId": this._id,
-            "memberDates": []
+            "memberId": this._id
         };
 
         if($(event.target).hasClass("toggleOn"))
