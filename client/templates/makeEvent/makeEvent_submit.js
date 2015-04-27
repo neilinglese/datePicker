@@ -30,7 +30,7 @@ Template.makeEvent.events({
         var newEventMonth = $('div.toggleOn').data('month');
         var eventDescription = document.getElementById("eventDescription").value;
         var newEvent = {
-            'creatorId': Meteor.userId(),
+            'userId': Meteor.userId(),
             'eventName': newEventName,
             'description': eventDescription,
             'dates': eventData,
