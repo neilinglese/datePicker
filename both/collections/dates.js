@@ -1,6 +1,6 @@
-DatesPicked = new Mongo.Collection('datesPicked');
+Dates = new Mongo.Collection('dates');
 
-DatesPicked.allow({
+Dates.allow({
 	insert: function(userId, doc){
 		return !! userId;
 	},
