@@ -24,6 +24,9 @@ Router.route('/makeEvent',{
 
 Router.route('/eventPage/:_id', {
 	name: 'eventPage',
+  waitOn: function(){
+        return Meteor.subscribe('getAllMembersDates', this.params._id); 
+  },
 	data: function(){return Events.findOne(this.params._id);}
 });
 
@@ -34,6 +37,9 @@ Router.route('/editEvent/:_id', {
 
 Router.route('/eventPage/:_id/pickDates', {
   name: 'pickDates',
+  waitOn: function(){
+    return Meteor.subscribe('getUserDates',this.params._id); 
+  },
   data: function(){return Events.findOne(this.params._id);}
 });
 

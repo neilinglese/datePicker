@@ -14,7 +14,6 @@ Template.makeEvent.helpers({
         return Meteor.users.find({ _id: { $in: Meteor.user().friends } }); 
     },
     year: function(){
-        console.log(Session.get('Year'));
         return Session.get('Year');
     }
 });

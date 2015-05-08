@@ -1,13 +1,13 @@
 Dates = new Mongo.Collection('dates');
 
 Dates.allow({
-	insert: function(userId, doc){
-		return !! userId;
+	insert: function(dateId, doc){
+		return !! dateId;
 	},
-	remove: function(userId, doc){
-		return !! userId;
+	remove: function(dateId, doc){
+		return !! dateId;
 	},
-	update: function(userId, doc, fieldnames){
-		return !! userId;
+	update: function(dateId, doc, fieldnames){
+		return !! dateId;
 	}
 });

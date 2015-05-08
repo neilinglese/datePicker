@@ -1,11 +1,10 @@
-Session.setDefault('somePeople', []); 
+
 
 Template.eventPage.onRendered(function(){
     /*Getting Event data from iron-router and storing it into an array*/
     var eventData = this.data.dates;
     
-    var somePeople = this.data.groupMembers;
-    Session.set('somePeople', this.data.groupMembers);
+
 
     //get reference to the targetMonthYear
     var targetMonthYear = this.data.eventMonthYear;   

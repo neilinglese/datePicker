@@ -1,12 +1,19 @@
 var targetMonthYear;
 var prevMonth;
 var nextMonth;
-var eventData;
+var datesDataArray;
+var id;
+var datesEventId;
+
+Template.pickDates.onRendered(function(){  
+
+    //get users dates for event
+    var datesDataAll = Dates.find({'event_id': this.data._id, 'eventMember_id': Meteor.userId()},{"_id": 1,"memberDatesPicked": 1}).fetch();
+    id = datesDataAll[0]['_id'];
+    datesDataArray = datesDataAll[0]['memberDatesPicked'];
+    console.log(datesDataArray);
 
 
-Template.pickDates.onRendered(function(){
-    //get event user dates
-    eventData = this.data.dates;
     //get reference to the div #pickDatesCal
     var $calContainer = $('#pickDatesCal');
 	//get the target month and year from db
@@ -28,8 +35,8 @@ Template.pickDates.onRendered(function(){
     	defaultDate: targetMonthYear,
     	/*dayRender function handling the intial rendering of days on page load*/
         dayRender: function (date, cell) {
-            /*For each item in the eventData onLoad adding the toggleOn class*/
-            $.each(eventData,function(index,value){
+            /*For each item in the datesDataArray onLoad adding the toggleOn class*/
+            $.each(datesDataArray,function(index,value){
                 $("td[data-date='"+value+"']").addClass('toggleOn');
             });
         },
@@ -46,31 +53,31 @@ Template.pickDates.onRendered(function(){
 	        /*OnClick storing day in DayClicked in a format of YYYY-MM-DD*/
 	        var DayClicked =  $.fullCalendar.moment(date).format('YYYY-MM-DD');
 	        $(this).toggleClass( "toggleOn" );
-	        /*If the day has a class of toggleOn pusinh into the eventData array else looping array and removing it*/
+	        /*If the day has a class of toggleOn pusinh into the datesDataArray array else looping array and removing it*/
 	        if($(this).hasClass("toggleOn"))
 	        {
 	            console.log('On');
-	            eventData.push(DayClicked);
+	            datesDataArray.push(DayClicked);
 	        }else{
 	            console.log('Off');
-	            for(var z = eventData.length; z--;) {
-	                if (eventData[z] === DayClicked) {
-	                    eventData.splice(z, 1);
+	            for(var z = datesDataArray.length; z--;) {
+	                if (datesDataArray[z] === DayClicked) {
+	                    datesDataArray.splice(z, 1);
 	                }
 	            }
 	        }
-	        console.log(eventData);
+	        console.log(datesDataArray);
         }//closes dayClick
     })//closes calendar
 });//closes onRendered
 
 Template.pickDates.events({
     'click #submitDatesChosen': function(){
-        var x = Meteor.userId();
-        if(x === this.userId){
-            Events.update({_id: this._id}, {$set:{'dates': eventData}});
-        }
-
+        console.log(datesDataArray);
+        //id = Dates.find({'event_id': this._id, 'eventMember_id': Meteor.userId()},{"_id": 1,"memberDatesPicked": 1}).fetch();
+        Dates.update({'_id': id}, {$set: {'memberDatesPicked': datesDataArray}});
+        console.log(this._id);
+        Router.go('eventPage', {_id: this._id});
     }
 });
 
