@@ -1,11 +1,13 @@
 
 
 Template.eventPage.onRendered(function(){
-    /*Getting Event data from iron-router and storing it into an array*/
-    var eventData = this.data.dates;
+    /*Get all members dates from dates collection*/
+    var allMembersDates = Dates.find({event_id: this.data._id}).fetch();
+    //variable for opacity divided by number of event members
+    var opacity = 1/allMembersDates.length;
+    console.log(opacity);
     
-
-
+    var eventData = this.data.dates;
     //get reference to the targetMonthYear
     var targetMonthYear = this.data.eventMonthYear;   
     //get reference to the #eventCalendar 
