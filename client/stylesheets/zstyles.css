@@ -71,8 +71,7 @@
 .form-style input[type="time"],
 .form-style input[type="url"],
 .form-style textarea,
-.form-style select
-{
+.form-style select{
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
@@ -99,8 +98,7 @@
 .form-style input[type="time"]:focus,
 .form-style input[type="url"]:focus,
 .form-style textarea:focus,
-.form-style select:focus
-{
+.form-style select:focus{
     box-shadow: 0 0 5px darkorange;
     padding: 3%;
     border: 1px solid darkorange;
@@ -130,18 +128,15 @@
     margin-top: 5px;
     margin-bottom: 5px;
 }
-<<<<<<< HEAD
+
 .profileCard{
 
 }
-=======
 
-.make-event-first-pick{
-    position: relative;
-    clear: both;
+.monthAndYear{
     width: 50%;
     float: left;
-
+    margin-bottom: 10rem;
 }
 
 .year-container{
@@ -158,7 +153,7 @@
 }
 
 .monthsList{
-    margin-top: 5rem;
+    margin-top: 2rem;
 }
 
 .month{
@@ -182,12 +177,34 @@
     margin-top: -1.2rem;
 }
 
+.monthAndYear{
+    width: 50%;
+    float: left;
+}
+.monthAndYearHeader{
+
+    text-align: center;
+    margin: 0 auto;
+}
+
 .list-group-item{
    min-height: 65px;
 }
 
-
-
+.pickDatesContainer{
+    padding-top: 50px;
+    width: 50%;
+    margin: 0 auto;
+}
+.h2{
+    font-size: 140%;
+    text-align: center;
+}
+.eventPageWhoList{
+    list-style-type: none;
+    margin: 0px;
+    text-decoration: none;
+}
 
 
 

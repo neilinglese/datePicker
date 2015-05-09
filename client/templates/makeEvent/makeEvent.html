@@ -27,15 +27,14 @@
                 </form>
             </div>
         </div><!--closes .eventDetails-->
-        <div class="calView">
-            <div id ="eventCalendar"></div>
-        </div>
-        <div class="make-event-first-pick" id="monthAndYear">
+        <div class="monthAndYear" id="monthAndYear">
             <div id="year" class="year-container">
-                <h2>Year</h2>
-                <button class="goBack" id="prevYear" type="button">Previous</button>
-                <div class="centerCal" id="yearDisplayed">{{year}}</div>
-                <button class="goForward" id="nextYear" type="button">Next</button>
+                <h2 class="h2">Year</h2>
+                <div class="monthAndYearHeader">
+                    <button class="goBack" id="prevYear" type="button">Previous</button>
+                    <div class="centerCal" id="yearDisplayed">{{year}}</div>
+                    <button class="goForward" id="nextYear" type="button">Next</button>
+                </div>
             </div>
             <div id="months" class="monthsList">
                 <div class="month" data-month= "0">
