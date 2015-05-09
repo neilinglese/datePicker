@@ -2,12 +2,45 @@
 
 Template.eventPage.onRendered(function(){
     /*Get all members dates from dates collection*/
-    var allMembersDates = Dates.find({event_id: this.data._id}).fetch();
+    var allMembersDatesInfo = Dates.find({event_id: this.data._id}).fetch();
     //variable for opacity divided by number of event members
-    var opacity = 1/allMembersDates.length;
-    console.log(opacity);
+    var opacityPerMember = 1/allMembersDatesInfo.length;
+    var allMembersDates = [];
+    var eventData =[];
+
+    //for each allMembersDates get the memberDatesPicked and store in array
+    $.each(allMembersDatesInfo, function(index, value){
+        //set variable for each dates object in allMembersDatesInfo
+        var individual = allMembersDatesInfo[index]['memberDatesPicked'];
+        //loop through each object and push memberDates to allMembersDates array
+        $.each(individual, function(index, value){
+            allMembersDates.push(value);
+        })
+    });
+
+    console.log(allMembersDates);
+    var sorted = allMembersDates.sort();
+
+    console.log(sorted);
+
+    var repeatNumber = function(array, elem){
+        var count = 0;
+        for(var i = 0; i < array.length; i++){
+            if(array[i] === elem){
+                count++;
+            }
+        }
+        //push all to array
+        return [elem, count];
+    };
+
+    //loop through allMembersDates array 
+    for(var i = 0; i < allMembersDates.length; i++){
+        eventData.push(repeatNumber(sorted, allMembersDates[i]));
+    }
     
-    var eventData = this.data.dates;
+    console.log(eventData);
+
     //get reference to the targetMonthYear
     var targetMonthYear = this.data.eventMonthYear;   
     //get reference to the #eventCalendar 
@@ -28,7 +61,7 @@ Template.eventPage.onRendered(function(){
         dayRender: function (date, cell) {
             /*For each item in the eventData onLoad adding the toggleOn class*/
             $.each(eventData,function(index,value){
-                $("td[data-date='"+value+"']").addClass('toggleOn');
+                $("td[data-date='"+value[0]+"']").addClass('toggleOn').css('opacity', opacityPerMember*value[1]);
             });
         },
         viewRender: function(view, element){
