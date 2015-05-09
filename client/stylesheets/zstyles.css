@@ -208,8 +208,36 @@
 
 
 
+.fa {color: black;}
+.menuItem{
 
+    color: black;
+}
 
+.menuItem:link {
+    color: black;
+}
 
+/* visited link */
+.menuItem:visited {
+    color: black;
+}
+
+/* mouse over link */
+.menuItem:hover {
+    color: black;
+}
+
+/* selected link */
+.menuItem:active {
+    color: black;
+}
+
+.dashboardLogoContainer{
+    background: green;
+    width: 50%;
+
+    height: 50px;
+}
 
 

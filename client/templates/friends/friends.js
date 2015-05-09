@@ -1,26 +1,22 @@
 Template.friends.rendered = function() {
+    Session.set('searchResults',null);
 };
 
 
-Template.friends.events({'submit form' : function(event, template) {
-    event.preventDefault(); //prevent page reload
-    var email = event.target.Email.value;
-    var result = {
-        'result' : Meteor.users.find({ "emails.address" : email })
-    };
-
-    console.log(result);
-
-},
+Template.friends.events({
+    'submit form' : function(e) {
+        e.preventDefault(); //prevent page reload
+        var email = event.target.Email.value;
+        Meteor.call('get_users_by_email',email,function(error,userid){
+            Session.set('searchResults',userid)
+        });
+    },
     'click .addBtn': function(e) {
         e.preventDefault();
-        var thisId = this._id;
-        console.log(thisId);
-
-
+        var userToBeAdded = Session.get('searchResults')._id;
         Meteor.users.update({_id: Meteor.user()._id}, {
             $addToSet: {
-                "friends": thisId
+                "friends": userToBeAdded
             }
         });
 
@@ -31,10 +27,6 @@ Template.friends.events({'submit form' : function(event, template) {
 
 Template.friends.helpers({
 
-    userDirectory: function () {
-        return Meteor.users.find();
-    },
-
     userNotFriend: function() {
         var user = Meteor.user();
 
@@ -43,13 +35,10 @@ Template.friends.helpers({
             return true;
         }
 
-        if(Meteor.user().friends.indexOf(this._id) > -1)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return Meteor.user().friends.indexOf(Session.get('searchResults')._id) <= -1;
+    },
+
+    getResults : function(){
+        return Session.get('searchResults');
     }
 });
