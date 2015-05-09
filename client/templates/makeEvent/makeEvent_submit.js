@@ -8,41 +8,12 @@ var thisYear = moment().year();
 var thisMonth = moment().month();
 Session.set('Year', thisYear);
 
-Template.makeEvent.rendered = function() {
-    /*Rendering Calendar and handling click events*/
-    var calendar = $('#eventCalendar').fullCalendar({
-        /*DayClick function handling day clicking*/
-        dayClick:function(date,allDay,jsEvent,view){
-            /*OnClick storing day in DayClicked in a format of YYYY-MM-DD*/
-            var DayClicked =  $.fullCalendar.moment(date).format('YYYY-MM-DD');
-            $(this).toggleClass( "toggleOn" );
-            /*If the day has a class of toggleOn pusinh into the eventData array else looping array and removing it*/
-            if($(this).hasClass("toggleOn"))
-            {
-                console.log('On');
-                eventData.push(DayClicked);
-            }else{
-                console.log('Off');
-                for(var z = eventData.length; z--;) {
-                    if (eventData[z] === DayClicked) {
-                        eventData.splice(z, 1);
-                    }
-                }
-            }
-            /*Just logging the dayClicked and the array to check for errors*/
-            console.log(DayClicked);
-            console.log(eventData);
-        }
-    })
-};
-
 
 Template.makeEvent.helpers({
     friends: function () {
         return Meteor.users.find({ _id: { $in: Meteor.user().friends } }); 
     },
     year: function(){
-        console.log(Session.get('Year'));
         return Session.get('Year');
     }
 });
@@ -69,12 +40,33 @@ Template.makeEvent.events({
         if(newEventName ==='' || newEventMonth === undefined || ((newEventMonth < thisMonth) && (Session.get('Year') === thisYear))){
             Notifications.error(newEvent.eventName, 'All new events must have an Event name and a Valid Month');
         }else{
-            /*resetting the eventData array*/
-            eventData = [];
-            groupMembers = [];
+
             Session.set('Year', thisYear);
             newEvent._id = Events.insert(newEvent);
             Session.set('newEventId', newEvent._id);
+
+            //create Dates db record for eventCreator
+            Dates.insert({
+                'event_id': newEvent._id,
+                'eventMember_id': Meteor.userId(),
+                'memberDatesPicked': []
+            });
+
+
+            //create Dates db record for each groupMember
+            for(var i = 0; i < groupMembers.length; i++){
+                var newDatesPicked = {
+                    'event_id': newEvent._id,
+                    'eventMember_id': groupMembers[i].memberId,
+                    'memberDatesPicked': []
+                };
+                Dates.insert(newDatesPicked);
+            }
+
+            /*resetting the eventData array*/
+            eventData = [];
+            groupMembers = [];
+
             Router.go('eventPage', newEvent);
             Notifications.success(newEvent.eventName, 'New Event was Created successfully');
         }
@@ -83,8 +75,7 @@ Template.makeEvent.events({
     'click .addBtn': function(e) {
         e.preventDefault();
         var newMember = {
-            "memberId": this._id,
-            "memberDates": []
+            "memberId": this._id
         };
 
         if($(event.target).hasClass("toggleOn"))
