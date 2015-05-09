@@ -39,7 +39,6 @@ Template.eventPage.onRendered(function(){
         eventData.push(repeatNumber(sorted, allMembersDates[i]));
     }
     
-    console.log(eventData);
 
     //get reference to the targetMonthYear
     var targetMonthYear = this.data.eventMonthYear;   
