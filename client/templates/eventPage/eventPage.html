@@ -14,20 +14,20 @@
                         <li>
                             <h4>
                             {{#each userName userId}}
-                                {{profile.name}}
+                                {{profile.firstname}} {{profile.lastname}}
                             {{/each}}</h4>
                         </li>
                         {{#each groupMembers}}
                         <li>
                             <h4>
                                 {{#each profileNames memberId}}
-                                    {{profile.name}}
+                                    {{profile.firstname}} {{profile.lastname}}
                                 {{/each}}
                             </h4>
                         </li>
                         {{/each}}
                     </ul>
-                <button class="button" id="pickDatesBtn" type="button">Pick my dates!</button>
+                <button class="button btn btn-primary dashboardButtons" id="pickDatesBtn" type="button">Pick my dates!</button>
             </div>
         </div>
     </div>

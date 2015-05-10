@@ -24,7 +24,15 @@
     margin-top: 0;
     padding: 3px;
 }
-
+.selectBtn{
+    background: white;
+    font-size: 15px;
+    font-weight: bold;
+    width: 100px;
+    height: 50px;
+    margin-top: 0;
+    padding: 3px;
+}
 /*Event Section Spacing*/
 .eventDetails{
     float: left;
@@ -193,8 +201,14 @@
 
 .pickDatesContainer{
     padding-top: 50px;
-    width: 50%;
+    width: 75%;
     margin: 0 auto;
+}
+.pickdatesBtn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .h2{
     font-size: 140%;
@@ -208,8 +222,36 @@
 
 
 
+.fa {color: black;}
+.menuItem{
 
+    color: black;
+}
 
+.menuItem:link {
+    color: black;
+}
 
+/* visited link */
+.menuItem:visited {
+    color: black;
+}
+
+/* mouse over link */
+.menuItem:hover {
+    color: black;
+}
+
+/* selected link */
+.menuItem:active {
+    color: black;
+}
+
+.dashboardLogoContainer{
+    background: green;
+    width: 50%;
+
+    height: 50px;
+}
 
 
