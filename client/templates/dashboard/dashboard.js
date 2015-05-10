@@ -6,24 +6,49 @@ Meteor.startup(function () {
 
 Template.dashboard.rendered = function() {
 
-    if(Events.find({$or: [{userId: Meteor.userId()}, {'groupMembers.memberId': Meteor.userId()}]}).count() === 0){
-        Session.set("hideButtons", false);
-    }else{
-        Session.set("hideButtons", true);
-        return Events.find({userId: Meteor.userId()});
-    }
+    Session.set("hideButtons", true);
+    Session.set("invitedEventsCheck", true);
+    Session.set("yourEventsCheck", true);
 };
 
 Template.dashboard.helpers({
 
     hidingButtons: function() { return Session.get('hideButtons'); },
+    yourEventsCheck: function() { return Session.get('yourEventsCheck'); },
+    invitedEventsCheck: function() { return Session.get('invitedEventsCheck'); },
 
-    includesUser: function(){
+    hasEvents: function(){
         if(Events.find({$or: [{userId: Meteor.userId()}, {'groupMembers.memberId': Meteor.userId()}]}).count() === 0){
             Session.set("hideButtons", false);
+            return false;
         }else{
             Session.set("hideButtons", true);
-            return Events.find({$or: [{userId: Meteor.userId()}, {'groupMembers.memberId': Meteor.userId()}]});
+            return true;
+        }
+    },
+    yourEvents: function(){
+        if(Events.find({userId: Meteor.userId()}).count() === 0){
+            console.log('yourevents false');
+
+            Session.set("yourEventsCheck", false);
+
+        }else{
+            console.log('yourevents true');
+
+            Session.set("yourEventsCheck", true);
+            return Events.find({userId: Meteor.userId()});
+        }
+    },
+    invitedEvents: function(){
+        if(Events.find({'groupMembers.memberId': Meteor.userId()}).count() === 0){
+            console.log('invites false');
+
+            Session.set("invitedEventsCheck", false);
+        }else{
+            console.log('invites true');
+
+            Session.set("invitedEventsCheck", true);
+            return Events.find({'groupMembers.memberId': Meteor.userId()});
         }
     }
 });

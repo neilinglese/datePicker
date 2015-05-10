@@ -4,16 +4,35 @@
         <div class="page-header ">
             <h1>Dashboard</h1>
         </div>
-        {{#if hidingButtons}}
-            <ul class="list-group">
-                {{#each includesUser}}
-                    <li class="list-group-item" >
-                        <a href="#" class="eventLink">{{eventName}}</a><br/>{{description}}
-                        <button class="deleteEventBtn btn btn-primary dashboardButtons ">Delete Event</button>
-                        <button class="editEventBtn btn btn-primary dashboardButtons">Edit Event</button>
-                    </li>
-                {{/each}}
-            </ul>
+        {{#if hasEvents}}
+            <h3>Your Created Events</h3>
+            <hr/>
+            {{#if yourEventsCheck}}
+                <ul class="list-group">
+                    {{#each yourEvents}}
+                        <li class="list-group-item" >
+                            <a href="#" class="eventLink">{{eventName}}</a><br/>{{description}}
+                            <button class="deleteEventBtn btn btn-primary dashboardButtons ">Delete Event</button>
+                            <button class="editEventBtn btn btn-primary dashboardButtons">Edit Event</button>
+                        </li>
+                    {{/each}}
+                </ul>
+            {{else}}
+                <h3 class="noEventText">You currently don't have any events created</h3>
+            {{/if}}
+            <h3>Events others have invited you to</h3>
+            <hr/>
+            {{#if invitedEventsCheck}}
+                <ul class="list-group">
+                    {{#each invitedEvents}}
+                        <li class="list-group-item" >
+                            <a href="#" class="eventLink">{{eventName}}</a><br/>{{description}}
+                        </li>
+                    {{/each}}
+                </ul>
+            {{else}}
+                <h3 class="noEventText">Your currently not invited to any other events</h3>
+            {{/if}}
         {{else}}
             <h3 class="noEventText">You currently don't have any events scheduled</h3>
         {{/if}}
