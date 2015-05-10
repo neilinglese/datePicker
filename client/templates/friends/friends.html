@@ -19,12 +19,12 @@
                 <div class="form-style">
                     <h1>Results</h1>
                     <form>
-                        First Name: {{getResults.name}}<br/>
-                        Last Name:<input type="text" name="lastName" value="{{currentUser.profile.lastname}}"><br/>
+                        First Name: {{getResults.profile.firstname}}<br/>
+                        Last Name: {{getResults.profile.lastname}}<br/>
                         Email: {{getResults.emails/[0].address}}<br/>
-                        About:<textarea name="about" id="about" type="text" placeholder="about yourself" rows="8" cols="50">{{currentUser.profile.about}}</textarea><br>
+                        About: {{getResults.profile.about}}<br/>
                         {{#if userNotFriend}}
-                            <input type="submit" value="Add">
+                            <input class="btn btn-primary dashboardButtons" type="submit" value="Add">
                         {{/if}}
                     </form>
                 </div>
