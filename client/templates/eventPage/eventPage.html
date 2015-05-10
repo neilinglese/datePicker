@@ -14,14 +14,14 @@
                         <li>
                             <h4>
                             {{#each userName userId}}
-                                {{profile.name}}
+                                {{profile.firstname}} {{profile.lastname}}
                             {{/each}}</h4>
                         </li>
                         {{#each groupMembers}}
                         <li>
                             <h4>
                                 {{#each profileNames memberId}}
-                                    {{profile.name}}
+                                    {{profile.firstname}} {{profile.lastname}}
                                 {{/each}}
                             </h4>
                         </li>

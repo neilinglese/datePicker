@@ -8,7 +8,7 @@ Meteor.publish("userlist", function () {
             '_id': 1,
 
 
-            'profile.name': 1,
+            'profile.firstname': 1,
             'profile.lastname': 1,
             'profile.about': 1,
 
