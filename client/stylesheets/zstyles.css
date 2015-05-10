@@ -16,6 +16,10 @@
 .noEventText{
     text-align: center;
 }
+.SmallnoEventText{
+    text-align: center;
+
+}
 .listBox{
     position: relative;
     left: 200px;
@@ -255,3 +259,9 @@
 }
 
 
+.footer{
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+}
