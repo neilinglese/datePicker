@@ -18,27 +18,41 @@ Template.eventPage.onRendered(function(){
         })
     });
 
-    console.log(allMembersDates);
     var sorted = allMembersDates.sort();
 
-    console.log(sorted);
-
-    var repeatNumber = function(array, elem){
+    var repeatNumber = function(array, elem, nextElem, prevElem){
         var count = 0;
+        var firstInstance;
         for(var i = 0; i < array.length; i++){
-            if(array[i] === elem){
+            /*Check to make sure current array element matches elem and increment count.  
+            if elem is the same as the nextElem but not the same as the prevElement 
+            firstInstance is true*/
+            if(array[i] === elem && elem === nextElem && elem !== prevElem){
                 count++;
+                firstInstance = true;
+            /*Check to make sure current array element matches elem and increment count.
+            if elem is the same as the prevElem firstInstance is false*/
+            }else if(array[i] === elem && elem === prevElem){
+                count++;
+                firstInstance = false;
+            /*Check to make sure current array element matches elem and increment count.
+            If elem is not the same as the prevElem and is not the same as the nextElem
+            firstInstance is true*/
+            }else if(array[i] === elem && elem !== prevElem && elem !== nextElem){
+                count++;
+                firstInstance = true;
             }
         }
         //push all to array
-        return [elem, count];
+        return [elem, count, firstInstance];
     };
 
     //loop through allMembersDates array 
     for(var i = 0; i < allMembersDates.length; i++){
-        eventData.push(repeatNumber(sorted, allMembersDates[i]));
-    }
-    
+        eventData.push(repeatNumber(sorted, allMembersDates[i], allMembersDates[i+1], allMembersDates[i-1]));
+    } 
+
+    console.log(eventData);
 
     //get reference to the targetMonthYear
     var targetMonthYear = this.data.eventMonthYear;   
