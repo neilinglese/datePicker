@@ -16,10 +16,10 @@ Template.editEvent.rendered = function() {
             /*If the day has a class of toggleOn pusinh into the eventData array else looping array and removing it*/
             if($(this).hasClass("toggleOn"))
             {
-                console.log('On');
+                //console.log('On');
                 eventData.push(DayClicked);
             }else{
-                console.log('Off');
+                //console.log('Off');
                 for(var z = eventData.length; z--;) {
                     if (eventData[z] === DayClicked) {
                         eventData.splice(z, 1);
@@ -27,7 +27,7 @@ Template.editEvent.rendered = function() {
                 }
             }
             /*Just logging the array to check for errors*/
-            console.log(eventData);
+            //console.log(eventData);
         },
         /*dayRender function handling the intial rendering of days on page load*/
         dayRender: function (date, cell) {

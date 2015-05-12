@@ -1,10 +1,10 @@
 Accounts.onCreateUser(function(options, user) {
 
-	console.log(options.profile);
+	//console.log(options.profile);
 	if (options.profile)
 		user.profile = options.profile;
 
 	user.friends = [];
-	console.log(user);
+	//console.log(user);
 	return user;
 });

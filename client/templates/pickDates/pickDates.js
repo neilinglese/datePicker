@@ -11,7 +11,7 @@ Template.pickDates.onRendered(function(){
     var datesDataAll = Dates.find({'event_id': this.data._id, 'eventMember_id': Meteor.userId()},{"_id": 1,"memberDatesPicked": 1}).fetch();
     id = datesDataAll[0]['_id'];
     datesDataArray = datesDataAll[0]['memberDatesPicked'];
-    console.log(datesDataArray);
+    //console.log(datesDataArray);
 
 
     //get reference to the div #pickDatesCal
@@ -56,27 +56,27 @@ Template.pickDates.onRendered(function(){
 	        /*If the day has a class of toggleOn pusinh into the datesDataArray array else looping array and removing it*/
 	        if($(this).hasClass("toggleOn"))
 	        {
-	            console.log('On');
+	            //console.log('On');
 	            datesDataArray.push(DayClicked);
 	        }else{
-	            console.log('Off');
+	            //console.log('Off');
 	            for(var z = datesDataArray.length; z--;) {
 	                if (datesDataArray[z] === DayClicked) {
 	                    datesDataArray.splice(z, 1);
 	                }
 	            }
 	        }
-	        console.log(datesDataArray);
+	        //console.log(datesDataArray);
         }//closes dayClick
     })//closes calendar
 });//closes onRendered
 
 Template.pickDates.events({
     'click #submitDatesChosen': function(){
-        console.log(datesDataArray);
+        //console.log(datesDataArray);
         //id = Dates.find({'event_id': this._id, 'eventMember_id': Meteor.userId()},{"_id": 1,"memberDatesPicked": 1}).fetch();
         Dates.update({'_id': id}, {$set: {'memberDatesPicked': datesDataArray}});
-        console.log(this._id);
+        //console.log(this._id);
         Router.go('eventPage', {_id: this._id});
     }
 });

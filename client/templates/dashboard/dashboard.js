@@ -28,12 +28,12 @@ Template.dashboard.helpers({
     },
     yourEvents: function(){
         if(Events.find({userId: Meteor.userId()}).count() === 0){
-            console.log('yourevents false');
+            //console.log('yourevents false');
 
             Session.set("yourEventsCheck", false);
 
         }else{
-            console.log('yourevents true');
+           // console.log('yourevents true');
 
             Session.set("yourEventsCheck", true);
             return Events.find({userId: Meteor.userId()});
@@ -41,11 +41,11 @@ Template.dashboard.helpers({
     },
     invitedEvents: function(){
         if(Events.find({'groupMembers.memberId': Meteor.userId()}).count() === 0){
-            console.log('invites false');
+            //console.log('invites false');
 
             Session.set("invitedEventsCheck", false);
         }else{
-            console.log('invites true');
+           // console.log('invites true');
 
             Session.set("invitedEventsCheck", true);
             return Events.find({'groupMembers.memberId': Meteor.userId()});

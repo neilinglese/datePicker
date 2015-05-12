@@ -80,10 +80,10 @@ Template.makeEvent.events({
 
         if($(event.target).hasClass("toggleOn"))
         {
-            console.log('friend on');
+            //console.log('friend on');
             groupMembers.push(newMember);
         }else{
-            console.log('friend Off');
+            //console.log('friend Off');
             for(var z = groupMembers.length; z--;) {
                 if (groupMembers[z].memberId === this._id) {
                     groupMembers.splice(z, 1);
@@ -91,7 +91,7 @@ Template.makeEvent.events({
             }
         }
 
-        console.log(groupMembers);
+        //console.log(groupMembers);
     },
 
     'click #prevYear': function(){
