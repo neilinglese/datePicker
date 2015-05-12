@@ -6,29 +6,6 @@ Template.editEvent.rendered = function() {
     eventData = this.data.dates;
     /*Rendering Calendar and handling click events*/
     var calendar = $('#eventCalendar').fullCalendar({
-        /*DayClick function handling day clicking*/
-        dayClick:function(date,allDay,jsEvent,view){
-            /*OnClick storing day in DayClicked in a format of YYYY-MM-DD*/
-            var DayClicked =  $.fullCalendar.moment(date).format('YYYY-MM-DD')
-            /*Toggling class on day td of calendar*/
-            $(this).toggleClass( "toggleOn" );
-
-            /*If the day has a class of toggleOn pusinh into the eventData array else looping array and removing it*/
-            if($(this).hasClass("toggleOn"))
-            {
-                //console.log('On');
-                eventData.push(DayClicked);
-            }else{
-                //console.log('Off');
-                for(var z = eventData.length; z--;) {
-                    if (eventData[z] === DayClicked) {
-                        eventData.splice(z, 1);
-                    }
-                }
-            }
-            /*Just logging the array to check for errors*/
-            //console.log(eventData);
-        },
         /*dayRender function handling the intial rendering of days on page load*/
         dayRender: function (date, cell) {
             /*For each item in the eventData onLoad adding the toggleOn class*/
