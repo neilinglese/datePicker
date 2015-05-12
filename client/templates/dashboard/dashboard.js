@@ -74,6 +74,9 @@ Template.dashboard.events({
             Events.remove({_id: thisId});
         }
         Notifications.error('Event Deleted', 'Your event was deleted successfully');
+    },
+    'click #pickDatesBtn': function(){
+        Router.go('pickDates', {_id:this._id});
     }
 });
 

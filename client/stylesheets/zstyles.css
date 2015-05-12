@@ -32,9 +32,19 @@
     background: white;
     font-size: 15px;
     font-weight: bold;
-    width: 100px;
+    width: 200px;
     height: 50px;
-    margin-top: 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 3px;
+}
+.eventBtn{
+    font-size: 15px;
+    font-weight: bold;
+    width: 200px;
+    height: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 3px;
 }
 /*Event Section Spacing*/
@@ -185,7 +195,7 @@
     background: darkorange;
 }
 
-.deleteEventBtn, .editEventBtn{
+.deleteEventBtn, .editEventBtn, .pickBtn{
     margin-top: -1.2rem;
 }
 
@@ -223,7 +233,9 @@
     margin: 0px;
     text-decoration: none;
 }
+.friendBtn{
 
+}
 
 
 .fa {color: black;}

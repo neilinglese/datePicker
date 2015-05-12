@@ -9,19 +9,18 @@
                 <h1>Event Information</h1>
                 <form>
                     <input type="text" name="eventName" id="eventName" value="" placeholder="Event Name" />
-                    <textarea name="eventDescription" id="eventDescription" type="text" placeholder="Give a little description ;)" rows="8" cols="50"></textarea><br>
+                    <textarea name="eventDescription" id="eventDescription" type="text" placeholder="Give a little description ;)" rows="8" cols="50"></textarea><br/><br/>
+                    <h1>Who is invited?</h1>
                     <ul class="eventPageWhoList">
 
                         <!--STILL WORKING ON THIS-->
                         {{#each friends}}
                             <li>
-
-
-                                <button class="addBtn selectBtn" onclick="$(this).toggleClass('toggleOn')">{{profile.firstname}} {{profile.lastname}}</button>
-
+                                <button class="addBtn selectBtn friendBtn center-block" onclick="$(this).toggleClass('toggleOn')">{{profile.firstname}} {{profile.lastname}}</button>
                             </li>
                         {{/each}}
                     </ul>
+                    <br/><br/>
                     <!-- -->
                     <input type="submit" value="Create Event" />
                 </form>
@@ -31,9 +30,9 @@
             <div id="year" class="year-container">
                 <h2 class="h2">Year</h2>
                 <div class="monthAndYearHeader">
-                    <button class="goBack" id="prevYear" type="button">Previous</button>
+                    <button class="goBack  btn btn-primary dashboardButtons" id="prevYear" type="button">Previous</button>
                     <div class="centerCal" id="yearDisplayed">{{year}}</div>
-                    <button class="goForward" id="nextYear" type="button">Next</button>
+                    <button class="goForward  btn btn-primary dashboardButtons" id="nextYear" type="button">Next</button>
                 </div>
             </div>
             <div id="months" class="monthsList">
