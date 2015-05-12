@@ -13,12 +13,24 @@ Template.profile.events({
                 Notifications.error('Email Not Updated', 'Your email address is not unique');
             } else {
                 // proceed with other updates
-                Meteor.users.update({_id:Meteor.user()._id}, {$set:{
-                    "profile.name":username,
-                    "profile.lastname":lastname,
-                    "profile.about":about
-                }});
-                Notifications.success('Profile Updated', 'Your information was updated successfully');
+                if(username == "")
+                {
+                    Notifications.error('Profile Not Updated', 'Please enter a valid first name');
+
+                }
+                else if(lastname =="")
+                {
+                    Notifications.error('Profile Not Updated', 'Please enter a valid last name');
+                }
+                else
+                {
+                    Meteor.users.update({_id:Meteor.user()._id}, {$set:{
+                        "profile.firstname":username,
+                        "profile.lastname":lastname,
+                        "profile.about":about
+                    }});
+                    Notifications.success('Profile Updated', 'Your information was updated successfully');
+                }
             }
         });
 
