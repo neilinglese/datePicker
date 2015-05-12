@@ -8,7 +8,20 @@ Template.friends.events({
         e.preventDefault(); //prevent page reload
         var email = event.target.Email.value;
         Meteor.call('get_users_by_email',email,function(error,userid){
-            Session.set('searchResults',userid)
+            if(error)
+            {
+               console.log(error);
+            }
+            else{
+                if(userid == null)
+                {
+                    Notifications.error('No results found', 'please search for another email');
+                    Session.set('searchResults',null)
+                }
+                else{
+                    Session.set('searchResults',userid)
+                }
+            }
         });
     },
     'click .addBtn': function(e) {
