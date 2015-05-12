@@ -11,7 +11,7 @@ Meteor.methods({
                'emails[0].address': 1
            }}));*/
 
-       return Meteor.users.findOne({'emails': {$elemMatch: {address:email}}},
+       return Meteor.users.findOne({'emails': {$elemMatch: {address: {$regex : new RegExp(email,"i")}}}},
            {fields: {
                '_id': 1,
                'name': 1,

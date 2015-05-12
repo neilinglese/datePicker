@@ -9,7 +9,7 @@ Template.profile.events({
         var about = document.getElementById("about").value;
         var email = event.target.Email.value;
         Meteor.call('updateemailfunction', email, function(error, result) {
-            if (error) {
+            if (error || result == false) {
                 Notifications.error('Email Not Updated', 'Your email address is not unique');
             } else {
                 // proceed with other updates
