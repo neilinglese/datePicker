@@ -13,12 +13,12 @@ Template.profile.events({
                 Notifications.error('Email Not Updated', 'Your email address is not unique');
             } else {
                 // proceed with other updates
-                if(username == "")
+                if(username.trim() == "")
                 {
                     Notifications.error('Profile Not Updated', 'Please enter a valid first name');
 
                 }
-                else if(lastname =="")
+                else if(lastname.trim() == "")
                 {
                     Notifications.error('Profile Not Updated', 'Please enter a valid last name');
                 }
