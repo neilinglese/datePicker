@@ -7,7 +7,7 @@ Template.profile.events({
         var username = event.target.userName.value;
         var lastname = event.target.lastName.value;
         var about = document.getElementById("about").value;
-        var email = event.target.Email.value;
+        var email = event.target.Email.value.toLowerCase();
         Meteor.call('updateemailfunction', email, function(error, result) {
             if (error || result == false) {
                 Notifications.error('Email Not Updated', 'Your email address is not unique');

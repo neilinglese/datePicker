@@ -218,7 +218,7 @@
 
 .pickDatesContainer{
     padding-top: 50px;
-    width: 75%;
+    width: 70%;
     margin: 0 auto;
 }
 .pickdatesBtn{
@@ -276,6 +276,7 @@
 .footer{
     position: absolute;
     bottom: 20px;
+    padding-top: 5px;
     left: 0;
     right: 0;
 }
